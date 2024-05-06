@@ -1,0 +1,123 @@
+---
+import { Image } from "astro:assets";
+import person1 from "@/assets/person1.jpeg";
+import person2 from "@/assets/person2.jpg";
+import person3 from "@/assets/person3.jpg";
+import person4 from "@/assets/person4.jpg";
+import person5 from "@/assets/person5.jpg";
+---
+
+<div class="flex gap-4 items-center justify-center">
+  <div class="flex -space-x-5">
+    <div
+      class="flex w-12 h-12 rounded-full border-[3px] border-white bg-[#376ADE]"
+    >
+      <Image
+        src={person1}
+        alt="person 1"
+        loading="eager"
+        class="rounded-full"
+      />
+    </div>
+    <div
+      class="flex w-12 h-12 rounded-full border-[3px] border-white bg-[#570DF8]"
+    >
+      <Image
+        src={person2}
+        alt="person 2"
+        loading="eager"
+        class="rounded-full"
+      />
+    </div>
+    <div
+      class="flex w-12 h-12 rounded-full border-[3px] border-white bg-[#22C55E]"
+    >
+      <Image
+        src={person3}
+        alt="person 3"
+        loading="eager"
+        class="rounded-full"
+      />
+    </div>
+    <div
+      class="flex w-12 h-12 rounded-full border-[3px] border-white bg-[#E6A675]"
+    >
+      <Image
+        src={person4}
+        alt="person 4"
+        loading="eager"
+        class="rounded-full"
+      />
+    </div>
+    <div
+      class="flex w-12 h-12 rounded-full border-[3px] border-white bg-[#F87272]"
+    >
+      <Image
+        src={person5}
+        alt="person 5"
+        loading="eager"
+        class="rounded-full"
+      />
+    </div>
+  </div>
+  <div class="flex flex-col gap-1">
+    <div class="flex items-center">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 text-yellow-500"
+        ><path
+          fill="currentColor"
+          d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z"
+        ></path></svg
+      >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 text-yellow-500"
+        ><path
+          fill="currentColor"
+          d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z"
+        ></path></svg
+      >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 text-yellow-500"
+        ><path
+          fill="currentColor"
+          d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z"
+        ></path></svg
+      >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 text-yellow-500"
+        ><path
+          fill="currentColor"
+          d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z"
+        ></path></svg
+      >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-5 h-5 text-yellow-500"
+        ><path
+          fill="currentColor"
+          d="m12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72l3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41l-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18l-1.1 4.72c-.2.86.73 1.54 1.49 1.08z"
+        ></path></svg
+      >
+    </div>
+    <p class="text-base"><span class="text-bold">100+</span> happy customers</p>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+---
+
+<header class="bg-bg w-full sticky top-0 z-50 shadow-md">
+  <div
+    class="xl:max-w-7xl px-6 xl:px-0 mx-auto py-4 flex justify-between items-center h-20"
+  >
+    <div class="flex items-center gap-6">
+      <a href="/" class="text-2xl font-bold flex gap-3 items-center">
+        <Image src="/logo.svg" alt="LeadUp logo" width={40} height={42} />
+        LeadUp</a
+      >
+      <div class="flex gap-4 items-center">
+        <a href="/signup" class="link">Get Started</a>
+        <a href="/#features" class="link">Features</a>
+        <a href="/#pricing" class="link">Pricing</a>
+        <a href="/#faq" class="link">FAQ</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="/login" class="link">Login</a>
+      <a
+        href="/signup"
+        class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-zinc-50"
+        >Sign Up <span class="italic font-normal"> — it's free</span></a
+      >
+    </div>
+  </div>
+</header>
+
+<style>
+  .link {
+    @apply flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all hover:text-primary;
+  }
+</style>
