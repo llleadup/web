@@ -7,6 +7,19 @@ import Header from "@/components/Header.astro";
   <Header />
   <h1>Dashboard</h1>
   <form action="/api/auth/signout">
-    <button type="submit" class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white">Sign out</button>
+    <button
+      type="submit"
+      class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white"
+      >Sign out</button
+    >
+  </form>
+
+  <form action="/api/payment/checkout" method="post">
+    <h2>Buy subscription</h2>
+    <button
+      type="submit"
+      class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white"
+      >Checkout</button
+    >
   </form>
 </Layout>
