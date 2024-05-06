@@ -42,10 +42,10 @@ const Faq = () => {
       {questions.map((q) => (
         <li key={q.id} className="border-t border-white">
           <button
-            className="flex items-center py-5 w-full gap-2"
+            className="flex items-center py-4 md:py-5 w-full gap-2"
             onClick={() => handleActive(q.id)}
           >
-            <span className="flex-1 text-left text-xl">{q.q}</span>
+            <span className="flex-1 text-left text-base md:text-xl">{q.q}</span>
             <div
               className="relative w-6 h-6 transition-all duration-300 ease-in-out"
               style={{ transform: `rotateZ(${active === q.id ? "90deg" : 0}` }}
@@ -66,7 +66,7 @@ const Faq = () => {
               opacity: active === q.id ? 1 : 0,
             }}
           >
-            <div className="pb-5 text-white">{q.a}</div>
+            <div className="pb-5 text-sm md:text-base text-white">{q.a}</div>
           </div>
         </li>
       ))}

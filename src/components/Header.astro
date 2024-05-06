@@ -11,7 +11,7 @@ import { Image } from "astro:assets";
         <Image src="/logo.svg" alt="LeadUp logo" width={40} height={42} />
         LeadUp</a
       >
-      <div class="flex gap-4 items-center">
+      <div class="hidden lg:flex gap-4 items-center ">
         <a href="/signup" class="link">Get Started</a>
         <a href="/#features" class="link">Features</a>
         <a href="/#pricing" class="link">Pricing</a>
@@ -23,7 +23,7 @@ import { Image } from "astro:assets";
       <a
         href="/signup"
         class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white"
-        >Sign Up <span class="italic font-normal"> — it's free</span></a
+        >Sign Up <span class="hidden md:block italic font-normal"> — it's free</span></a
       >
     </div>
   </div>
