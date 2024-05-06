@@ -1,0 +1,23 @@
+---
+import Header from "@/components/Header.astro"
+import Layout from "./Layout.astro";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<Layout title={title}>
+  <Header />
+  <div class="auth">
+    <slot />
+  </div>
+</Layout>
+<style>
+  .auth {
+    min-height: calc(100svh - 15rem);
+    @apply grid place-items-center;
+  }
+</style>

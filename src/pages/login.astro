@@ -1,0 +1,40 @@
+---
+import AuthLayout from "@/layouts/AuthLayout.astro";
+---
+
+<AuthLayout title="LeadUp | Login">
+  <div class="mx-auto max-w-sm w-full flex flex-col">
+    <form
+      action="/api/auth/login"
+      method="post"
+      class="flex flex-col relative p-6 rounded-md bg-bg-accent"
+    >
+      <div class="text-3xl font-semibold">Login</div>
+      <p class="text-zinc-500 text-sm mt-2 mb-6">
+        Don't have an account? <a
+          href="/signup"
+          class="font-medium hover:text-primary">Sign Up</a
+        >
+      </p>
+      <input
+        type="email"
+        class="px-4 py-3 rounded-md border-white border bg-bg-accent text-base outline-0 focus-visible:outline-4 focus-visible:outline-primary mb-5"
+        placeholder="Email"
+        name="email"
+        autocomplete="false"
+      />
+      <input
+        type="password"
+        class="px-4 py-3 rounded-md border-white border bg-bg-accent text-base outline-0 focus-visible:outline-4 focus-visible:outline-primary mb-5"
+        placeholder="Password"
+        name="password"
+        autocomplete="false"
+      />
+      <button
+        type="submit"
+        class="bg-primary rounded-md text-lg font-semibold px-6 py-3 text-zinc-50"
+        >Login</button
+      >
+    </form>
+  </div>
+</AuthLayout>
