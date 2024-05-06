@@ -255,7 +255,7 @@ const testimonials = [
         </div>
       </div>
     </section>
-    <section id="#pricing" class="bg-bg-accent w-full mx-auto py-24">
+    <section id="pricing" class="bg-bg-accent w-full mx-auto py-24">
       <div class="xl:max-w-7xl px-6 xl:px-0 mx-auto">
         <span class="block mb-3 text-base text-primary font-bold text-center"
           >Pricing</span
@@ -314,7 +314,7 @@ const testimonials = [
             <div>
               <a
                 href="/signup"
-                class="bg-primary rounded-lg flex items-center py-4 justify-center"
+                class="bg-primary rounded-lg flex items-center py-4 justify-center text-sm font-medium"
                 >Get Started</a
               >
               <span class="block mt-2.5 text-sm font-medium text-center"
@@ -330,12 +330,26 @@ const testimonials = [
       class="w-full xl:max-w-7xl px-6 xl:px-0 mx-auto py-24 flex flex-col lg:flex-row gap-20"
     >
       <div class="basis-1/2">
-        <span class="block mb-3 text-base text-primary font-bold"
-          >FAQ</span
-        >
+        <span class="block mb-3 text-base text-primary font-bold">FAQ</span>
         <h2 class="text-5xl font-bold">Any Questions?</h2>
       </div>
       <Faq client:visible />
+    </section>
+    <section class="bg-bg-accent w-full mx-auto py-24">
+      <div class="xl:max-w-7xl px-6 xl:px-0 mx-auto">
+        <div class="flex flex-col gap-8 items-center">
+          <h2 class="text-4xl font-medium text-center leading-tight">
+            Start Today, Reach Millions <span class="text-primary"
+              >Tomorrow</span
+            >
+          </h2>
+          <a
+            href="/#pricing"
+            class="bg-primary rounded-md text-base font-normal px-4 text-white py-2 text-center w-fit"
+            >Get Started Now</a
+          >
+        </div>
+      </div>
     </section>
   </main>
 </BaseLayout>

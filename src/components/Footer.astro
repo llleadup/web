@@ -1,7 +1,46 @@
 ---
-
+import { Image } from "astro:assets";
 ---
 
-<footer>
-  <h1>Footer</h1>
+<footer class="w-full xl:max-w-7xl px-6 xl:px-0 mx-auto py-24">
+  <div class="flex justify-between items-center">
+    <div class="flex flex-col gap-4">
+      <a href="/" class="text-2xl font-bold flex gap-3 items-center">
+        <Image src="/logo.svg" alt="LeadUp logo" width={40} height={42} />
+        LeadUp</a
+      >
+      <p class="text-sm max-w-[220px]">
+        Best tools to help you to generate leads for your business
+      </p>
+      <span class="text-sm text-zinc-500"
+        >Copyright © 2024 - All rights reserved</span
+      >
+    </div>
+    <div class="flex gap-24">
+      <div>
+        <p class="text-base font-bold">Links</p>
+        <ul class="flex flex-col mt-4 gap-2.5 text-sm">
+          <li><a href="/login">Login</a></li>
+          <li><a href="/">Features</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+          <li><a href="/#testimonials">Testimonials</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-base font-bold">Legal</p>
+        <ul class="flex flex-col mt-4 gap-2.5 text-sm">
+          <li><a href="/terms">Terms of services</a></li>
+          <li><a href="/privacy">Privacy policy</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="mt-10 text-sm">
+    Build with love ❤️ by <a
+      href="https://www.dankorotenko.com"
+      target="_blank"
+      class="hover:text-primary">Daniel Korotenko</a
+    > & <a href="/" target="_blank" class="hover:text-primary">Yehor Nekrasov</a
+    >
+  </div>
 </footer>

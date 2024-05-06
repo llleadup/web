@@ -42,7 +42,7 @@ const Faq = () => {
       {questions.map((q) => (
         <li key={q.id} className="border-t border-white">
           <button
-            className="flex items-center py-5 w-full"
+            className="flex items-center py-5 w-full gap-2"
             onClick={() => handleActive(q.id)}
           >
             <span className="flex-1 text-left text-xl">{q.q}</span>
