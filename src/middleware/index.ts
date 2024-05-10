@@ -1,5 +1,5 @@
 import { defineMiddleware } from "astro:middleware";
-import { supabase } from "@/lib/supabase"
+import { supabase } from "@/lib/supabase";
 import micromatch from "micromatch";
 
 const protectedRoutes = ["/dashboard(|/)"];
@@ -32,6 +32,7 @@ export const onRequest = defineMiddleware(
       }
 
       locals.email = data.user?.email!;
+      locals.id = data.user?.id!;
       cookies.set("sb-access-token", data?.session?.access_token!, {
         sameSite: "strict",
         path: "/",
@@ -63,7 +64,7 @@ export const onRequest = defineMiddleware(
           JSON.stringify({
             error: "Unauthorized",
           }),
-          { status: 401 },
+          { status: 401 }
         );
       }
 
@@ -78,11 +79,11 @@ export const onRequest = defineMiddleware(
           JSON.stringify({
             error: "Unauthorized",
           }),
-          { status: 401 },
+          { status: 401 }
         );
       }
     }
 
     return next();
-  },
+  }
 );

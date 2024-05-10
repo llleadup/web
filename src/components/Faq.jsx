@@ -7,23 +7,23 @@ const questions = [
   },
   {
     id: 1,
-    q: "How to get refund?",
-    a: "There is no possible way to get refund, so think if you really need it before purchasing.",
+    q: "How does your service help me kickstart my lead generation efforts?",
+    a: "Our service provides a comprehensive roadmap tailored to your business needs, guiding you through the intricacies of lead generation. From identifying your target audience to implementing effective strategies, we equip you with the tools and knowledge needed to generate quality leads efficiently.",
   },
   {
     id: 2,
-    q: "How many leads can i generate after using this app?",
-    a: "As much as you want. Our tools will help you to do it in much more effective way.",
+    q: "How long does it typically take to see results from your lead generation service?",
+    a: "The timeline for seeing results can vary depending on various factors such as industry, target audience, and the complexity of your offerings. However, our streamlined processes and proven methodologies are designed to deliver measurable results within a reasonable timeframe.",
   },
   {
     id: 3,
-    q: "What is going on here guys pls help me?",
-    a: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque quisquam perspiciatis accusantium distinctio hic nesciunt! Assumenda placeat soluta commodi consectetur!",
+    q: "Can your service accommodate businesses of different sizes and industries?",
+    a: "Yes, our service is designed to cater to businesses of all sizes and industries. Whether you're a small startup or a large enterprise, our flexible approach and customizable solutions can be tailored to suit your unique requirements and objectives.",
   },
   {
     id: 4,
-    q: "When you walk through a storm?",
-    a: "You never walk alone bro.",
+    q: "What kind of support is available if I encounter any issues?",
+    a: "We provide dedicated customer support channels, including email and live chat, to address any issues or concerns you may have. Our support team is available to assist you during business hours and strives to provide prompt and helpful responses to ensure a smooth and positive experience with our service.",
   },
 ];
 const Faq = () => {
