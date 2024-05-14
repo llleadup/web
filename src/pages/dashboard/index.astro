@@ -1,0 +1,29 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import { getUser } from "@/lib/supabase";
+
+const { data, error } = await getUser(Astro.locals.id);
+---
+
+<Layout title="Dashboard | LeadUp">
+  <Header />
+  <div class="w-full lg:max-w-4xl px-6 xl:px-0 mx-auto py-8">
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-bold">My directions</h2>
+      <a
+        href="/dashboard/directions"
+        class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white hover:bg-primary-accent"
+        >+ Add Direction</a
+      >
+    </div>
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div class="w-full h-40 bg-bg-accent rounded-md"></div>
+      <div class="w-full h-40 bg-bg-accent rounded-md"></div>
+      <div class="w-full h-40 bg-bg-accent rounded-md"></div>
+    </div>
+    <div class="flex items-center justify-between">
+      <h2 class="text-xl font-bold">My Todos</h2>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,36 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import { getUser, supabase } from "@/lib/supabase";
+
+const { data, error } = await getUser(Astro.locals.id);
+const { data: directions, error: directionsError } = await supabase
+  .from("directions")
+  .select("*");
+---
+
+<Layout title="Directions | LeadUp">
+  <Header />
+  <div class="w-full lg:max-w-4xl px-6 xl:px-0 mx-auto py-8">
+    <div class="flex items-center justify-between">
+      <h1 class="text-xl font-bold">Directions</h1>
+    </div>
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+      {
+        directions &&
+          directions.map((d) => (
+            <a href={`/dashboard/directions/${d.slug}`}>
+            <div class="font-medium w-full flex items-center justify-center py-4 border border-bg-accent-2 rounded-md transition-all duration-300 hover:bg-bg-accent hover:border-zinc-100 cursor-pointer">
+              {d.name}
+            </div>
+          </a>
+          ))
+      }
+      <div
+        class="font-medium w-full flex items-center justify-center py-4 border border-dashed border-bg-accent-2 rounded-md text-bg-accent-2"
+      >
+        Coming soon...
+      </div>
+    </div>
+  </div>
+</Layout>

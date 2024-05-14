@@ -10,5 +10,13 @@ export const supabase = createClient(
       detectSessionInUrl: false,
       persistSession: true,
     },
-  },
+  }
 );
+
+export const getUser = async (id: string) => {
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", id);
+  return { data, error };
+};

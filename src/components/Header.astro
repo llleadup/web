@@ -1,5 +1,12 @@
 ---
+import { supabase } from "@/lib/supabase";
 import { Image } from "astro:assets";
+import MiniProfile from '@/components/MiniProfile'
+let email: string = "";
+const { data, error } = await supabase.auth.getSession();
+if (data.session && Astro.cookies.get("sb-access-token")) {
+  email = data.session?.user.email!;
+}
 ---
 
 <header class="bg-bg w-full sticky top-0 z-50 shadow-md">
@@ -11,21 +18,54 @@ import { Image } from "astro:assets";
         <Image src="/logo.svg" alt="LeadUp logo" width={40} height={42} />
         LeadUp</a
       >
-      <div class="hidden lg:flex gap-4 items-center ">
-        <a href="/signup" class="link">Get Started</a>
-        <a href="/#features" class="link">Features</a>
-        <a href="/#pricing" class="link">Pricing</a>
-        <a href="/#faq" class="link">FAQ</a>
+      <div class="hidden lg:flex gap-4 items-center">
+        {
+          email && email !== "" ? (
+            <>
+              <a href="/dashboard" class="link">
+                Dashboard
+              </a>
+              <a href="/dashboard/directions" class="link">
+                Directions
+              </a>
+            </>
+          ) : (
+            <>
+              <a href="/signup" class="link">
+                Get Started
+              </a>
+              <a href="/#features" class="link">
+                Features
+              </a>
+              <a href="/#pricing" class="link">
+                Pricing
+              </a>
+              <a href="/#faq" class="link">
+                FAQ
+              </a>
+            </>
+          )
+        }
       </div>
     </div>
-    <div class="flex items-center gap-2">
-      <a href="/login" class="link">Login</a>
-      <a
-        href="/signup"
-        class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white"
-        >Sign Up <span class="hidden md:block italic font-normal"> — it's free</span></a
-      >
-    </div>
+    {
+      email ? (
+        <MiniProfile email={email} client:only="react" />
+      ) : (
+        <div class="flex items-center gap-2">
+          <a href="/login" class="link">
+            Login
+          </a>
+          <a
+            href="/signup"
+            class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white"
+          >
+            Sign Up{" "}
+            <span class="hidden md:block italic font-normal"> — it's free</span>
+          </a>
+        </div>
+      )
+    }
   </div>
 </header>
 
