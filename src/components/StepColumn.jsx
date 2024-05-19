@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getRequest, slugify } from "@/utils";
+import { getRequest, postRequest, slugify } from "@/utils";
 
 const StepColumn = ({ step, userId, direction }) => {
   const [substeps, setSubsteps] = useState([]);
@@ -34,6 +34,22 @@ const StepColumn = ({ step, userId, direction }) => {
     fetchCompletedSubsteps();
   }, [step.id, userId]);
 
+  const handleSubstepClick = async (substepId) => {
+    try {
+      const response = await postRequest("/api/progress/add", {
+        userId,
+        substepId,
+      });
+
+      if (response.message === "Progress added") {
+        setCompletedSubsteps((prev) => new Set(prev).add(substepId));
+      }
+    } catch (error) {
+      console.error("Error adding progress:", error);
+      setError(error.message);
+    }
+  };
+
   return (
     <div className="flex flex-col border-r-2 border-bg-accent-2">
       <div className="flex items-center min-w-[300px] py-4 px-2 border-b border-bg-accent-2">
@@ -56,6 +72,7 @@ const StepColumn = ({ step, userId, direction }) => {
                 href={`/dashboard/directions/${direction.slug}/${slugify(
                   s.title
                 )}`}
+                onClick={() => handleSubstepClick(s.id)}
                 key={s.id}
                 className="overflow-hidden relative flex flex-col items-start min-w-[300px] gap-2 px-4 py-2.5 bg-bg-accent-3 rounded-md border border-transparent transition-all duration-300 hover:border-primary"
               >
