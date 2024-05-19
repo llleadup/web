@@ -1,0 +1,48 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+const { frontmatter } = Astro.props;
+const { title } = frontmatter;
+---
+
+<Layout title={title}>
+  <Header />
+  <div class="w-full lg:max-w-3xl px-6 xl:px-0 mx-auto py-8">
+    <slot />
+  </div>
+</Layout>
+
+<style is:inline>
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  h3{
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  ul,
+  ol {
+    margin-bottom: 20px;
+  }
+  ul {
+    list-style-type: disc;
+  }
+  ol {
+    list-style-type: decimal;
+  }
+  li::marker{
+    font-size: 18px;
+    font-weight: 600;
+  }
+  p{
+    margin-bottom: 16px;
+  }
+</style>

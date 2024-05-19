@@ -1,0 +1,58 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import { getUser, supabase } from "@/lib/supabase";
+
+import StepColumn from "@/components/StepColumn";
+
+const { id: userId } = Astro.locals
+const { slug } = Astro.params;
+const { data: directions, error: directionsError } = await supabase
+  .from("directions")
+  .select("*")
+  .eq("slug", slug);
+if (!directions || directions.length === 0) {
+  return Astro.redirect("/404");
+}
+
+const { data: roadmaps, error: roadmapsError } = await supabase
+  .from("roadmaps")
+  .select("*")
+  .eq("direction_id", directions[0].id);
+
+if (!roadmaps || roadmaps.length === 0) {
+  return Astro.redirect("/404");
+}
+
+const { data: steps, error: stepsError } = await supabase
+  .from("steps")
+  .select("*")
+  .order('step_number', { ascending: true })
+  .eq("roadmap_id", roadmaps[0].id)
+
+if (!steps || steps.length === 0) {
+  return Astro.redirect("/404");
+}
+---
+
+<Layout title="Directions | LeadUp">
+  <Header />
+  <div class="w-full lg:max-w-6xl px-6 xl:px-0 mx-auto py-8">
+    <div class="flex items-center flex-col">
+      <h1 class="text-2xl font-bold">{directions[0].name}</h1>
+      <h2 class="text-xl font-semibold">{roadmaps[0].name}</h2>
+      <div class="w-full overflow-x-scroll flex items-start py-14">
+        <!-- <div
+          class="flex items-center justify-center min-w-[260px] text-base font-medium border border-primary py-4"
+        >
+          Start
+        </div> -->
+        {
+          steps.map((step) => (
+            <StepColumn step={step} userId={userId} direction={directions[0]} client:visible />
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Layout>

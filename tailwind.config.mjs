@@ -9,8 +9,11 @@ export default {
         bg: "#12172d",
         "bg-accent": "#1E2337",
         "bg-accent-2": "#2A314B",
+        'bg-accent-3': '#0E1222'
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };
