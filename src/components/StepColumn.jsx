@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getRequest, postRequest, slugify } from "@/utils";
 
-const StepColumn = ({ step, userId, direction }) => {
+const StepColumn = ({ step, userId, direction, roadmap }) => {
   const [substeps, setSubsteps] = useState([]);
   const [completedSubsteps, setCompletedSubsteps] = useState(new Set());
   const [error, setError] = useState(null);
@@ -39,6 +39,7 @@ const StepColumn = ({ step, userId, direction }) => {
       const response = await postRequest("/api/progress/add", {
         userId,
         substepId,
+        roadmapId: roadmap.id,
       });
 
       if (response.message === "Progress added") {
@@ -53,14 +54,11 @@ const StepColumn = ({ step, userId, direction }) => {
   return (
     <div className="flex flex-col border-r-2 border-bg-accent-2">
       <div className="flex items-center min-w-[300px] py-4 px-2 border-b border-bg-accent-2">
-        <a
-          href={`/dashboard/directions/${direction.slug}/${slugify(
-            step.title
-          )}`}
+        <div
           className="w-full hover:bg-bg-accent-2 text-base font-medium rounded-md py-2 px-3 h-16"
         >
           {step.step_number}. {step.title}
-        </a>
+        </div>
       </div>
       {error ? (
         <div className="text-red-500">{error}</div>

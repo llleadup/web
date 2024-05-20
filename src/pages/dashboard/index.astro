@@ -1,29 +1,60 @@
 ---
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
-import { getUser } from "@/lib/supabase";
+import DirectionCard from "@/components/DirectionCard";
+import { getUser, supabase } from "@/lib/supabase";
 
 const { data, error } = await getUser(Astro.locals.id);
+const { data: roadmaps, error: roadmapsError } = await supabase
+  .from("roadmaps")
+  .select("*");
+
+const { data: directions, error: directionsError } = await supabase
+  .from("directions")
+  .select("*");
+
+const { data: userRoadmaps, error: userRoadmapsError } = await supabase
+  .from("userroadmaps")
+  .select("*")
+  .eq("user_id", Astro.locals.id);
+console.log(userRoadmaps);
 ---
 
 <Layout title="Dashboard | LeadUp">
   <Header />
   <div class="w-full lg:max-w-4xl px-6 xl:px-0 mx-auto py-8">
     <div class="flex items-center justify-between">
-      <h2 class="text-xl font-bold">My directions</h2>
+      <h2 class="text-xl font-bold">My roadmaps</h2>
       <a
         href="/dashboard/directions"
         class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white hover:bg-primary-accent"
-        >+ Add Direction</a
+        >+ Add Roadmap</a
       >
     </div>
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-      <div class="w-full h-40 bg-bg-accent rounded-md"></div>
-      <div class="w-full h-40 bg-bg-accent rounded-md"></div>
-      <div class="w-full h-40 bg-bg-accent rounded-md"></div>
-    </div>
-    <div class="flex items-center justify-between">
-      <h2 class="text-xl font-bold">My Todos</h2>
-    </div>
-  </div>
+
+    {
+      directions && roadmaps && userRoadmaps && userRoadmaps.length !== 0 ? (
+        <div class="my-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {userRoadmaps.map((r) => {
+            const roadmap = roadmaps.find((entry) => entry.id === r.roadmap_id);
+            const direction = directions.find(
+              (entry) => entry.id === roadmap.direction_id
+            );
+            return (
+              <DirectionCard
+                direction={direction}
+                roadmap={roadmap}
+                userId={Astro.locals.id}
+                client:load
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <div class="my-6">You don't have active roadmaps yet!</div>
+      )
+    }
+  <!-- <div class="flex items-center justify-between">
+    <h2 class="text-xl font-bold">My Todos</h2>
+  </div> -->
 </Layout>

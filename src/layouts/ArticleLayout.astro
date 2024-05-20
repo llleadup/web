@@ -7,7 +7,12 @@ const { title } = frontmatter;
 
 <Layout title={title}>
   <Header />
+
   <div class="w-full lg:max-w-3xl px-6 xl:px-0 mx-auto py-8">
+    <button
+      onclick="window.history.back()"
+      class="py-2 px-4 bg-bg-accent rounded-md mb-4 transition-all duration-300 border border-bg hover:border-zinc-100">Go Back</button
+    >
     <slot />
   </div>
 </Layout>
@@ -23,7 +28,7 @@ const { title } = frontmatter;
     font-weight: 600;
     margin-bottom: 20px;
   }
-  h3{
+  h3 {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
@@ -38,11 +43,11 @@ const { title } = frontmatter;
   ol {
     list-style-type: decimal;
   }
-  li::marker{
+  li::marker {
     font-size: 18px;
     font-weight: 600;
   }
-  p{
+  p {
     margin-bottom: 16px;
   }
 </style>

@@ -1,7 +1,6 @@
 ---
 layout: ../../../../layouts/ArticleLayout.astro
 title: Metrics
-
 ---
 
 # Metrics in Marketing
