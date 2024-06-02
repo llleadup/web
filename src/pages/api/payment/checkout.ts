@@ -1,41 +1,47 @@
+import Stripe from "stripe";
 import type { APIRoute } from "astro";
+import { config } from "dotenv";
 
-export const POST: APIRoute = async ({ request, redirect }) => {
-  const payment = {
-    "amount": 2900,
-    "ccy": 840,
-    "merchantPaymInfo": {
-      "reference": "84d0070ee4e44667b31371d8f8813947",
-      "destination": "Lead Up plan purchasing",
-      "basketOrder": [
+config(); // Load environment variables
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: "2024-04-10", // Specify the API version if necessary
+});
+
+const URL = import.meta.env.DEV
+  ? "http://localhost:4321"
+  : "https://leadup.today";
+
+const plans = [
+  "price_1PMnUuHAvG26iv7UpxRE7LsF",
+  "price_1PMnoXHAvG26iv7UolUfHbf2",
+];
+
+export const POST: APIRoute = async ({ request, cookies }) => {
+  const { plan } = await request.json();
+  try {
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
         {
-          "name": "Basic Plan",
-          "qty": 1,
-          "sum": 2900,
-          "icon": "string",
-          "unit": "pcs.",
-          "code": "d21da1c47f3c45fca10a10c32518bdeb"
-        }
-      ]
-    },
-    "redirectUrl": "http://localhost:4321/",
-    "validity": 3600
-  };
+          price: plans[plan - 1],
+          quantity: 1,
+        },
+      ],
+      mode: "payment",
+      success_url: `${URL}/return/?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${URL}/`,
+    });
 
-  const res = await fetch(
-    "https://api.monobank.ua/api/merchant/invoice/create",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Token":
-          "u_ZCpUjZQ2fv0n_zfdQgd-4GrJKThfdgg3gdD60dwlr4",
-      },
-      body: JSON.stringify(payment),
-    }
-  );
-  const data = await res.json()
+    cookies.set("stripe_session_id", session.id);
 
-  console.log(data)
-  return redirect(data.pageUrl)
+    return new Response(JSON.stringify({ url: session.url }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  } catch (err: any) {
+    return new Response(JSON.stringify({ error: err.message }), {
+      status: err.statusCode || 500,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 };

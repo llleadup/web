@@ -53,15 +53,14 @@ if (data.session && Astro.cookies.get("sb-access-token")) {
         <MiniProfile email={email} client:only="react" />
       ) : (
         <div class="flex items-center gap-2">
-          <a href="/login" class="link">
+          {/* <a href="/login" class="link">
             Login
-          </a>
+          </a> */}
           <a
-            href="/signup"
+            href="/login"
             class="flex items-center justify-center text-sm px-3 font-semibold py-2 rounded-lg transition-all bg-primary text-white"
           >
-            Sign Up{" "}
-            <span class="hidden md:block italic font-normal"> — it's free</span>
+            Get Started{" "}
           </a>
         </div>
       )

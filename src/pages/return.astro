@@ -1,0 +1,31 @@
+---
+import AuthLayout from "@/layouts/AuthLayout.astro";
+import Stripe from 'stripe'
+
+export const prenender = false 
+const stripe = new Stripe(import.meta.env.STRIPE_SECRET_KEY)
+const sessionID = Astro.url.searchParams.get('session_id')
+let session;
+try {
+  session = await stripe.checkout.sessions.retrieve(sessionID as string);
+  
+} catch (e) {
+  console.log(e);
+  return Astro.redirect("/");
+}
+
+
+---
+
+<AuthLayout title="LeadUp | Purchase Success">
+  <div class="mx-auto max-w-sm w-full flex flex-col text-center">
+    <div
+      class="flex flex-col relative p-6 rounded-md bg-bg-accent"
+    >
+      <div class="text-3xl font-semibold mb-6">Thanks for purchase</div>
+      <p class="text-zinc-300 text-sm mt-2 mb-6">
+        Check your email to sign in
+      </p>
+    </div>
+  </div>
+</AuthLayout>

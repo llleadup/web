@@ -265,11 +265,12 @@ const testimonials = [
         </div>
       </div>
     </section>
+
     <section id="pricing" class="bg-bg-accent w-full mx-auto py-16 md:py-24">
       <div class="xl:max-w-7xl px-6 xl:px-0 mx-auto">
-        <span class="block mb-3 text-base text-primary font-bold text-center"
-          >Pricing</span
-        >
+        <span class="block mb-3 text-base text-primary font-bold text-center">
+          Pricing
+        </span>
         <h2 class="text-3xl lg:text-5xl font-bold text-center">
           Get Started with the Right Plan
         </h2>
@@ -288,16 +289,17 @@ const testimonials = [
                 <li>✅ Todo lists</li>
               </ul>
             </div>
-            <div>
-              <a
-                href="/signup"
-                class="bg-primary rounded-lg flex items-center py-4 justify-center text-sm font-medium"
-                >Get Started</a
+            <form id="basic-plan-form">
+              <button
+                type="submit"
+                class="bg-primary w-full rounded-lg flex items-center py-4 justify-center text-sm font-medium"
               >
-              <span class="block mt-2.5 text-sm font-medium text-center"
-                >Pay once. Access forever.</span
-              >
-            </div>
+                Get Started
+              </button>
+              <span class="block mt-2.5 text-sm font-medium text-center">
+                Pay once. Access forever.
+              </span>
+            </form>
           </div>
           <div
             class="p-8 bg-bg rounded-lg flex flex-col justify-between gap-16 md:w-[340px] border border-primary"
@@ -307,8 +309,9 @@ const testimonials = [
                 <h4 class="font-bold text-xl">Premium</h4>
                 <span
                   class="py-1.5 px-3 rounded-lg border border-primary font-medium text-xs bg-[#0098e933] text-primary"
-                  >Popular</span
                 >
+                  Popular
+                </span>
               </div>
               <span class="block mt-2.5 text-4xl font-extrabold">$49</span>
               <ul class="mt-6 flex flex-col gap-3.5">
@@ -322,20 +325,22 @@ const testimonials = [
                 <li>✅ It's just better</li>
               </ul>
             </div>
-            <div>
-              <a
-                href="/signup"
-                class="bg-primary rounded-lg flex items-center py-4 justify-center text-sm font-medium"
-                >Get Started</a
+            <form id="premium-plan-form">
+              <button
+                type="submit"
+                class="bg-primary w-full rounded-lg flex items-center py-4 justify-center text-sm font-medium"
               >
-              <span class="block mt-2.5 text-sm font-medium text-center"
-                >Pay once. Access forever.</span
-              >
-            </div>
+                Get Started
+              </button>
+              <span class="block mt-2.5 text-sm font-medium text-center">
+                Pay once. Access forever.
+              </span>
+            </form>
           </div>
         </div>
       </div>
     </section>
+
     <section
       id="faq"
       class="w-full xl:max-w-7xl px-6 xl:px-0 mx-auto py-16 md:py-24 flex flex-col lg:flex-row gap-12 md:gap-20"
@@ -364,3 +369,36 @@ const testimonials = [
     </section>
   </main>
 </BaseLayout>
+
+<script>
+  const formBasic = document.getElementById("basic-plan-form") as HTMLFormElement;
+  const formPremium = document.getElementById("premium-plan-form") as HTMLFormElement;
+
+  formBasic.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const response = await fetch("/api/payment/checkout", {
+      method: "POST",
+      body: JSON.stringify({ plan: 1 }),
+    });
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("An error occurred: " + data.error);
+    }
+  });
+
+  formPremium.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const response = await fetch("/api/payment/checkout", {
+      method: "POST",
+      body: JSON.stringify({ plan: 2 }),
+    });
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert("An error occurred: " + data.error);
+    }
+  });
+</script>

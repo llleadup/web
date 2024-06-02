@@ -5,6 +5,10 @@ import DirectionCard from "@/components/DirectionCard";
 import { getUser, supabase } from "@/lib/supabase";
 
 const { data, error } = await getUser(Astro.locals.id);
+
+if (data && data[0].subscription_level === 0) {
+  return Astro.redirect("/");
+}
 const { data: roadmaps, error: roadmapsError } = await supabase
   .from("roadmaps")
   .select("*");
@@ -17,7 +21,8 @@ const { data: userRoadmaps, error: userRoadmapsError } = await supabase
   .from("userroadmaps")
   .select("*")
   .eq("user_id", Astro.locals.id);
-console.log(userRoadmaps);
+
+
 ---
 
 <Layout title="Dashboard | LeadUp">
@@ -54,7 +59,8 @@ console.log(userRoadmaps);
         <div class="my-6">You don't have active roadmaps yet!</div>
       )
     }
-  <!-- <div class="flex items-center justify-between">
+    <!-- <div class="flex items-center justify-between">
     <h2 class="text-xl font-bold">My Todos</h2>
   </div> -->
+  </div>
 </Layout>
