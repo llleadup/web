@@ -12,9 +12,7 @@ export const POST: APIRoute = async ({ request, redirect, cookies }) => {
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: import.meta.env.DEV
-        ? "http://localhost:4321/api/auth/callback"
-        : "https://leadup.today/api/auth/callback",
+      emailRedirectTo: "https://leadup.today/api/auth/callback"
     },
   });
 
