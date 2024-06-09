@@ -5,22 +5,20 @@ import { postRequest } from "@/utils";
 const SignUpForm = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); 
+    setError("");
     try {
-      const response = await postRequest("/api/auth/register", {
+      const response = await postRequest("/api/auth/login", {
         email,
-        password,
       });
 
-      console.log("response\n", response)
+      if(response.error){
+        setError(response.error);
+      }
 
-    //   if (response.ok) {
-    //     window.location.href = "/login";
-    //   }
     } catch (error) {
       console.log(error);
       setError(error.message);
@@ -31,40 +29,24 @@ const SignUpForm = () => {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col bg-bg-accent relative p-6 rounded-md"
+        className="flex flex-col relative p-6 rounded-md bg-bg-accent"
       >
-        <div className="text-3xl font-semibold">Create Account</div>
-        <p className="text-zinc-400 text-sm mt-2 mb-6">
-          Already have an account?{" "}
-          <a href="/login" className="font-medium hover:text-primary">
-            Login
-          </a>
-        </p>
+        <div className="text-3xl font-semibold mb-6">Sign In</div>
         <input
           type="email"
           className="px-4 py-3 rounded-md border-white border bg-bg-accent text-base outline-0 focus-visible:outline-4 focus-visible:outline-primary mb-5"
           placeholder="Email"
           name="email"
-          autoComplete="off"
-          required
-          value={email}
+          autoComplete="false"
           onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          className="px-4 py-3 rounded-md border-white border bg-bg-accent text-base outline-0 focus-visible:outline-4 focus-visible:outline-primary mb-5"
-          placeholder="Password"
-          name="password"
-          autoComplete="off"
+          value={email}
           required
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
         />
         <button
           type="submit"
           className="bg-primary rounded-md text-lg font-semibold px-6 py-3 text-zinc-50"
         >
-          Create Account
+          Sign in with Email
         </button>
       </form>
       <AnimatePresence>

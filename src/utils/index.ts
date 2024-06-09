@@ -20,9 +20,9 @@ export const postRequest = async (url: string, data: Object) => {
       },
       body: JSON.stringify(data),
     });
-    if (!res.ok) {
-      throw new Error(`HTTP error! Status: ${res.status}`);
-    }
+    // if (!res.ok) {
+    //   throw new Error(`HTTP error! Status: ${res.status}`);
+    // }
     return await res.json();
   } catch (error) {
     console.error("Error with postRequest:", error);

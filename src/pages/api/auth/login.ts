@@ -2,13 +2,22 @@ import type { APIRoute } from "astro";
 import { supabase } from "../../../lib/supabase";
 
 export const POST: APIRoute = async ({ request, redirect, cookies }) => {
-  const formData = await request.formData();
-  const email = formData.get("email")?.toString();
+
+  const body = await request.json();
+  const email = body.email;
 
   if (!email) {
     return new Response("Email is required", { status: 400 });
   }
 
+  const { data, error: userError } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("name", email);
+
+  if (userError || data.length === 0) {
+    return Response.json({ error: "No user found, you need to have a subscription first" }, { status: 400 });
+  }
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
