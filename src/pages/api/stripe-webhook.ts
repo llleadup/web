@@ -12,7 +12,6 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 export const POST: APIRoute = async ({ request }) => {
   const sig = request.headers.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
-
   let event;
 
   try {
@@ -24,9 +23,9 @@ export const POST: APIRoute = async ({ request }) => {
 
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session;
-
     // Retrieve the email from the session object
-    const email = session.customer_email;
+    const email = session.customer_details?.email;
+
 
     // Perform your login logic here, e.g., generate a magic link
     if (email) {
@@ -36,6 +35,7 @@ export const POST: APIRoute = async ({ request }) => {
           emailRedirectTo: import.meta.env.DEV
             ? "http://localhost:4321/api/auth/callback"
             : "https://leadup.today/api/auth/callback",
+            data: { subscription_level: 1}
         },
       });
 
