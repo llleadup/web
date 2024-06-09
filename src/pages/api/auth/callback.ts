@@ -10,6 +10,15 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(authCode);
 
+  if (data.user?.user_metadata.subscription) {
+    await supabase
+      .from("profiles")
+      .update({
+        subscription_level: data.user.user_metadata.subscription,
+      })
+      .eq("id", data.user.id);
+  }
+
   if (error) {
     return new Response(error.message, { status: 500 });
   }

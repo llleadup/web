@@ -13,7 +13,6 @@ export const POST: APIRoute = async ({ request }) => {
   const sig = request.headers.get("stripe-signature");
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
   let event;
-
   try {
     const body = await request.text();
     event = stripe.webhooks.constructEvent(body, sig!, webhookSecret);
@@ -25,8 +24,8 @@ export const POST: APIRoute = async ({ request }) => {
     const session = event.data.object as Stripe.Checkout.Session;
     // Retrieve the email from the session object
     const email = session.customer_details?.email;
-
-
+    const subLevel: number = session.amount_subtotal === 2900 ? 1 : 2
+    console.log(subLevel)
     // Perform your login logic here, e.g., generate a magic link
     if (email) {
       const { error } = await supabase.auth.signInWithOtp({
@@ -35,7 +34,7 @@ export const POST: APIRoute = async ({ request }) => {
           emailRedirectTo: import.meta.env.DEV
             ? "http://localhost:4321/api/auth/callback"
             : "https://leadup.today/api/auth/callback",
-            data: { subscription_level: 1}
+            data: { subscription: subLevel}
         },
       });
 
@@ -43,7 +42,7 @@ export const POST: APIRoute = async ({ request }) => {
         return new Response(error.message, { status: 500 });
       }
     }
-  }
+  } 
 
   return new Response(JSON.stringify({ received: true }), { status: 200 });
 };
