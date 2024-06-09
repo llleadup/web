@@ -31,5 +31,5 @@ export const POST: APIRoute = async ({ request, redirect, cookies }) => {
     return new Response(error.message, { status: 500 });
   }
 
-  return redirect("/magic-link-sent");
+  return new Response(JSON.stringify({ sent: true }), { status: 200 });
 };

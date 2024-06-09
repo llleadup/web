@@ -18,6 +18,9 @@ const SignUpForm = () => {
       if(response.error){
         setError(response.error);
       }
+      if(response.sent){
+        window.location.pathname = '/magic-link-sent'
+      }
 
     } catch (error) {
       console.log(error);
