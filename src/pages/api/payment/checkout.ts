@@ -13,7 +13,7 @@ const URL = import.meta.env.DEV
   : "https://leadup.today";
 
 const plans = [
-  "price_1PMnUuHAvG26iv7UpxRE7LsF",
+  "price_1PShHvHAvG26iv7UTxl5Ejat",
   "price_1PMnoXHAvG26iv7UolUfHbf2",
 ];
 
