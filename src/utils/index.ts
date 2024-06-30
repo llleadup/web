@@ -30,6 +30,25 @@ export const postRequest = async (url: string, data: Object) => {
   }
 };
 
+export const deleteRequest = async (url: string, data: Object) => {
+  try {
+    const res = await fetch(API_URL + url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    // if (!res.ok) {
+    //   throw new Error(`HTTP error! Status: ${res.status}`);
+    // }
+    return await res.json();
+  } catch (error) {
+    console.error("Error with deleteRequest:", error);
+    throw error;
+  }
+}
+
 export const slugify = (text: string) => {
   return text
     .toString()

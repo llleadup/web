@@ -2,17 +2,17 @@ import type { APIRoute } from "astro";
 import { supabase } from "@/lib/supabase";
 
 export const POST: APIRoute = async ({ request, locals }) => {
-  const { roadmapId, userId } = await request.json();
+  const { directionId, userId } = await request.json();
   try {
     // Get the count of entries in the usersusbsteps table with the specified roadmap_id and user_id
-    const { count, error: usersubstepsError } = await supabase
-      .from("usersubsteps")
+    const { count, error: userTodoItemsError } = await supabase
+      .from("usertodo_items")
       .select("id", { count: "exact", head: true })
-      .eq("roadmap_id", roadmapId)
+      .eq("direction_id", directionId)
       .eq("user_id", userId);
 
-    if (usersubstepsError) {
-      throw new Error(usersubstepsError.message);
+    if (userTodoItemsError) {
+      throw new Error(userTodoItemsError.message);
     }
 
     return new Response(JSON.stringify({ count }), {

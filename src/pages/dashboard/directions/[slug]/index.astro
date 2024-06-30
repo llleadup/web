@@ -4,8 +4,9 @@ import Header from "@/components/Header.astro";
 import { getUser, supabase } from "@/lib/supabase";
 
 import StepColumn from "@/components/StepColumn";
+import TodoColumn from "@/components/TodoColumn";
 
-const { id: userId } = Astro.locals
+const { id: userId } = Astro.locals;
 const { slug } = Astro.params;
 const { data: directions, error: directionsError } = await supabase
   .from("directions")
@@ -27,26 +28,52 @@ if (!roadmaps || roadmaps.length === 0) {
 const { data: steps, error: stepsError } = await supabase
   .from("steps")
   .select("*")
-  .order('step_number', { ascending: true })
-  .eq("roadmap_id", roadmaps[0].id)
+  .order("step_number", { ascending: true })
+  .eq("roadmap_id", roadmaps[0].id);
 
 if (!steps || steps.length === 0) {
   return Astro.redirect("/404");
 }
 
+const { data: todos, error: todosError } = await supabase
+  .from("todos")
+  .select("*")
+  .eq("direction_id", directions[0].id);
 
+if (!todos || todos.length === 0) {
+  return Astro.redirect("/404");
+}
 ---
 
 <Layout title="Directions | LeadUp">
   <Header />
   <div class="w-full lg:max-w-6xl px-6 xl:px-0 mx-auto py-8">
-    <div class="flex items-center flex-col">
-      <h1 class="text-2xl font-bold">{directions[0].name}</h1>
-      <h2 class="text-xl font-semibold">{roadmaps[0].name}</h2>
-      <div class="w-full overflow-x-scroll flex items-start py-14">
+    <div class="flex flex-col">
+      <h1 class="text-2xl font-bold text-center mb-2">{directions[0].name}</h1>
+      <h2 class="text-xl font-semibold mb-2">Roadmap</h2>
+      <div class="w-full overflow-x-scroll flex items-start py-6">
         {
           steps.map((step) => (
-            <StepColumn step={step} userId={userId} direction={directions[0]} roadmap={roadmaps[0]} client:visible />
+            <StepColumn
+              step={step}
+              userId={userId}
+              direction={directions[0]}
+              roadmap={roadmaps[0]}
+              client:visible
+            />
+          ))
+        }
+      </div>
+      <h2 class="text-xl font-semibold mb-2">Todos</h2>
+      <div class="w-full overflow-x-scroll flex items-start py-6">
+        {
+          todos.map((t) => (
+            <TodoColumn
+              todo={t}
+              userId={userId}
+              direction={directions[0]}
+              client:visible
+            />
           ))
         }
       </div>
