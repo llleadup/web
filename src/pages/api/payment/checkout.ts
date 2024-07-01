@@ -13,8 +13,8 @@ const URL = import.meta.env.DEV
   : "https://leadup.today";
 
 const plans = [
-  "price_1PShHvHAvG26iv7UTxl5Ejat",
-  "price_1PMnoXHAvG26iv7UolUfHbf2",
+  "",
+  "price_1PXkivHAvG26iv7UYZXwvXFc",
 ];
 
 export const POST: APIRoute = async ({ request, cookies }) => {
