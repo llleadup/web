@@ -275,7 +275,7 @@ const testimonials = [
           Get Started with the Right Plan
         </h2>
         <div class="flex flex-col md:flex-row gap-8 mt-16 justify-center mb-10">
-          <div
+          <!-- <div
             class="p-8 bg-bg rounded-lg flex flex-col justify-between gap-16 md:w-[340px] border border-transparent"
           >
             <div>
@@ -300,29 +300,28 @@ const testimonials = [
                 Pay once. Access forever.
               </span>
             </form>
-          </div>
+          </div> -->
           <div
             class="p-8 bg-bg rounded-lg flex flex-col justify-between gap-16 md:w-[340px] border border-primary"
           >
             <div>
               <div class="flex gap-2.5 items-center">
-                <h4 class="font-bold text-xl">Premium</h4>
+                <h4 class="font-bold text-xl">Basic</h4>
                 <span
                   class="py-1.5 px-3 rounded-lg border border-primary font-medium text-xs bg-[#0098e933] text-primary"
                 >
                   Popular
                 </span>
               </div>
-              <span class="block mt-2.5 text-4xl font-extrabold">$49</span>
+              <span class="block mt-2.5 text-4xl font-extrabold">$19</span>
               <ul class="mt-6 flex flex-col gap-3.5">
                 <li>✅ Convenient roadmaps</li>
                 <li>✅ Useful tools</li>
                 <li>✅ Step-by-step instructions</li>
                 <li>✅ Lead generation channels</li>
                 <li>✅ To-do lists</li>
-                <li>✅ Personal sales support</li>
-                <li>✅ Trigger email templates</li>
-                <li>✅ It's just better</li>
+                <!-- <li>✅ Personal sales support</li> -->
+                <!-- <li>✅ Trigger email templates</li> -->
               </ul>
             </div>
             <form id="premium-plan-form">
@@ -371,22 +370,22 @@ const testimonials = [
 </BaseLayout>
 
 <script>
-  const formBasic = document.getElementById("basic-plan-form") as HTMLFormElement;
+  // const formBasic = document.getElementById("basic-plan-form") as HTMLFormElement;
   const formPremium = document.getElementById("premium-plan-form") as HTMLFormElement;
 
-  formBasic.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const response = await fetch("/api/payment/checkout", {
-      method: "POST",
-      body: JSON.stringify({ plan: 1 }),
-    });
-    const data = await response.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      alert("An error occurred: " + data.error);
-    }
-  });
+  // formBasic.addEventListener("submit", async (event) => {
+  //   event.preventDefault();
+  //   const response = await fetch("/api/payment/checkout", {
+  //     method: "POST",
+  //     body: JSON.stringify({ plan: 1 }),
+  //   });
+  //   const data = await response.json();
+  //   if (data.url) {
+  //     window.location.href = data.url;
+  //   } else {
+  //     alert("An error occurred: " + data.error);
+  //   }
+  // });
 
   formPremium.addEventListener("submit", async (event) => {
     event.preventDefault();
