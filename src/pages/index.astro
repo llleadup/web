@@ -2,6 +2,12 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Reviews from "@/components/Reviews.astro";
 import Faq from "@/components/Faq";
+import { Image } from "astro:assets";
+import review1 from '@/assets/review1.jpg'
+import review2 from '@/assets/review2.jpg'
+import review3 from '@/assets/review3.jpg'
+import review4 from '@/assets/review4.jpg'
+import review5 from '@/assets/review5.jpg'
 //pros and cons
 const cons = [
   {
@@ -55,30 +61,35 @@ const testimonials = [
     name: "Alex P.",
     // username: "@ericajohnson",
     text: "LeadUp has completely transformed how we acquire new prospects. This platform's comprehensive blueprints and clever capabilities have enabled us to procure promising prospects at a pace much swifter than in the past. It certainly merits consideration for any enterprise hoping to streamline their revenue generation attempts.",
+    img: review1
   },
   {
     id: 1,
     name: "Sarah T.",
     // username: "@jurgenklopp",
     text: "Adopting LeadUp has revolutionized the way our promotional personnel do their jobs. The intuitive layout and potent analysis tools have substantially bettered our prospect quality and changeover rates. Additionally, the assistance team never fails to react rapidly and helpfully to any issues.",
+    img: review2
   },
   {
     id: 2,
     name: "Michael B.",
     // username: "@damonwashington",
     text: "We were struggling immensely with lead generation until fortuitously discovering LeadUp. The comprehensive, nuanced guidance and practical yet highly useful tools provided have saved us countless laborious hours while exponentially boosting our productivity and efficiency. It has proven itself a must-have for any enterprise serious about growth and success in today's cutthroat business environment.",
+    img: review3
   },
   {
     id: 3,
     name: "Lisa M.",
     // username: "@luisdiazliverpool",
     text: "Navigating LeadUp's multifaceted platform was intuitively simple and incredibly effective. We've seen a noticeable, quantifiable increase in lead quality and conversion since enthusiastically embracing their multifaceted solutions. The meticulously designed, step-by-step instructions and knowledgeable consultant support have revolutionized our strategizing and tremendously augmented our sales figures. It has been a worthwhile investment.",
+    img: review4
   },
   {
     id: 4,
     name: "David R.",
     // username: "@moyadikayacassandra",
     text: "Just like it was promised, LeadUp does exactly what it says it will do. Due to the roadmaps and to-do lists developed by this tool, we no longer have to worry about generating leads but can concentrate on making sales instead. The lifetime pass that can be purchased for a single payment is another added advantage because you get quality service without any recurring monthly fee.",
+    img: review5
   },
 ];
 
@@ -245,10 +256,10 @@ const testimonials = [
           {
             testimonials.map((t) => (
               <div class="mb-6 z-0 break-inside-avoid-column">
-                <a href="/" target="_blank">
+                <div>
                   <div class="flex flex-col gap-3.5 p-6 bg-bg-accent rounded-lg">
                     <div class="flex items-center gap-4">
-                      <div class="w-10 h-10 rounded-full bg-zinc-300" />
+                      <Image src={t.img} alt="review" class="w-10 h-10 rounded-full bg-zinc-300"/>
                       <div class="flex flex-col">
                         <p class="font-semibold text-base">{t.name}</p>
                         {/* <span class="font-light text-zinc-500 text-xs">
@@ -258,7 +269,7 @@ const testimonials = [
                     </div>
                     <p class="text-base font-light">{t.text}</p>
                   </div>
-                </a>
+                </div>
               </div>
             ))
           }
